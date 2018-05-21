@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Note</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+<body>
+
+<div class="navbar">
+    <a href="index.html">Notes</a>
+    <a href="new.html" class="active">New</a>
+</div>
+
+
+<div class="container">
+    <h2>New Note</h2>
+    <ul class="note-form">
+        <li>
+            <label for="new-note-title">Title</label>
+            <input type="text" id="new-note-title" placeholder="Breakfast at Tiffanys">
+        </li>
+        <li>
+            <label for="new-note-description">Description</label>
+            <textarea rows="6" id="new-note-description" placeholder="Marktplatz St. Gallen"></textarea>
+        </li>
+        <li>
+            <label for="new-note-date">Date</label>
+            <input type="date" id="new-note-date" placeholder="Enter your email here">
+        </li>
+        <li>
+            <label for="rateInputId">Rate</label>
+            <input type="range" name="rateInputName" id="rateInputId" value="2" min="1" max="5"
+                   oninput="rateOutputId.value = rateInputId.value">
+            <output name="rateOutputName" id="rateOutputId">2</output>
+        </li>
+        <li>
+            <button type="submit" id="new-note-save">Save</button>
+        </li>
+    </ul>
+</div>
+<script src="js/jquery-3.3.1.slim.min.js"></script>
+<script src="js/new.js"></script>
+</body>
+</html>

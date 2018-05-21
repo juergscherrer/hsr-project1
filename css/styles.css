@@ -1,0 +1,30 @@
+@import url("./_variables.css");
+@import url("./_nav.css");
+@import url("./_form.css");
+@import url("_list.css");
+
+
+body {
+    font: normal 18px/1.5 "Fira Sans", "Helvetica Neue", sans-serif;
+    margin: 0;
+    background: var(--sec-color);
+    color: var(--main-color);
+}
+
+
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.container * {
+    box-sizing: border-box;
+}
+
+
+.btn:hover {
+    background: var(--main-color);
+    text-decoration: none;
+}
+

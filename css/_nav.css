@@ -1,0 +1,40 @@
+.navbar {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+
+@media all and (max-width: 800px) {
+    .navbar {
+        justify-content: space-around;
+    }
+}
+
+@media all and (max-width: 500px) {
+    .navbar {
+        flex-direction: column;
+    }
+}
+
+.navbar {
+    background-color: var(--sec-color);
+    border: solid var(--main-color) 2px;
+}
+
+.navbar a {
+    color: var(--main-color);
+    padding: 14px 20px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.navbar a:hover {
+    background-color: var(--main-color);
+    color: var(--sec-color);
+}
+
+.navbar a.active {
+    background-color: var(--main-color);
+    color: var(--sec-color);
+}
+

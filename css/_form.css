@@ -1,0 +1,110 @@
+.note-form {
+    list-style-type: none;
+    padding: 0;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+
+.note-form li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.note-form > li:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+.note-form li label,
+.note-form li p {
+    padding: 8px 0px;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+}
+
+.note-form > li > label,
+.note-form li p {
+    flex: 1 0 120px;
+    max-width: 220px;
+}
+
+.note-form > li > label + * {
+    flex: 1 0 220px;
+}
+
+.note-form li p {
+    margin: 0;
+}
+
+.note-form li input:not([type='checkbox']),
+.note-form li textarea {
+    padding: 12px;
+    border: none;
+    font-size: 15px;
+    border: solid var(--main-color) 2px;
+    background-color: var(--sec-color);
+    font: "Helvetica Neue";
+    color: var(--main-color);
+
+}
+
+.note-form li input::placeholder,
+.note-form li textarea::placeholder {
+    color: var(--main-color);
+    opacity: 1;
+}
+
+
+.note-form li input[type=range]{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.note-form li input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 5px;
+    background: var(--main-color);
+    border: none;
+    border-radius: 3px;
+}
+
+.note-form li input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: var(--main-color);
+    margin-top: -4px;
+}
+
+.note-form li input[type=range]:focus {
+    outline: none;
+}
+
+.note-form li input[type=range]:focus::-webkit-slider-runnable-track {
+    background: var(--main-color);
+}
+
+.note-form li output {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 3px;
+    height: 33px;
+    background-color: var(--main-color);
+    color: var(--sec-color);
+
+}
+
+
+.note-form li button {
+    margin-left: auto;
+    padding: 6px 20px 6px 20px;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    border: solid var(--main-color) 2px;
+    color: var(--main-color);
+    font-size: 20px;
+    text-decoration: none;
+}
