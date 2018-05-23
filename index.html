@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/fontawesome/fontawesome-all.css">
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
 </head>
 <body>
 
@@ -16,31 +18,39 @@
 
 
 <div class="container">
-    <div class="note-list">
-        <h2>Notes</h2>
-        <div class="notes-template-content"></div>
-    </div>
+    <h2>Notes</h2>
+    <div class="notes-template-content"></div>
 </div>
 
 <script id="notes-template" type="text/x-handlebars-template">
     {{#each this}}
-    <div class="note-box">
-        <div class="note-container">
-            <h3>{{title}}</h3>
+    <div class="note-item">
+        <h3>{{title}}</h3>
+        <p>{{description}}</p>
+        <div class="note-date">
+            <span><time>{{date}}</time></span>
         </div>
-        <div class="note-container" style="background-color:white">
-            <p>{{description}}</p>
+        <div class="note-rate">
+            {{#times rate}}
+            <span><i class="fas fa-star"></i></span>
+            {{/times}}
         </div>
-        <div class="note-container">
-            <p>{{date}}</p>
-            <p>{{rate}}</p>
+
+        <div class="note-actions">
+            <a id="edit_{{@index}}" class="edit" href="edit.html?note_id={{@index}}"><i class="fas fa-pencil-alt"></i></a>
+            <a data-deleteid="{{@index}}" class="delete" href="#"><i class="fas fa-trash-alt"></i></a>
         </div>
     </div>
     {{/each}}
 
 </script>
-<script src="js/jquery-3.3.1.slim.min.js"></script>
+
+
+
 <script src="js/handlebars-v4.0.11.js"></script>
 <script src="js/list.js"></script>
 </body>
 </html>
+
+
+

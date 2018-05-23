@@ -1,23 +1,19 @@
-.note-list {
-    padding: 0;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-.note-box {
+.note-item {
     border: 2px solid var(--main-color);
     margin: 0 auto 20px auto;
+    padding: 10px;
 }
 
-.note-container {
-    padding: 2px 16px;
-    background-color: #f1f1f1;
+.note-rate{
+    margin-top: 20px;
 }
 
-.promo {
-    background: #ccc;
-    padding: 3px;
+.note-actions {
+    text-align: right;
 }
 
-.expire {
-    color: red;
+.note-actions a {
+    color: var(--main-color);
 }
+
+
