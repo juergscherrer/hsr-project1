@@ -1,84 +1,67 @@
-
-(function() {
-    Handlebars.registerHelper('times', function(n, block) {
-        var accum = '';
-        for(var i = 0; i < n; ++i)
+(function () {
+    Handlebars.registerHelper('times', function (n, block) {
+        let accum = '';
+        for (let i = 0; i < n; ++i)
             accum += block.fn(i);
         return accum;
     });
 })();
 
 
-
-
-// $(document).on('click', '.delete', function () {
-//     console.log("delete");
-//     var id = $(this).attr('id').split('_');
-//     deleteNote(id);
-//
-// })
-
-
-
-
-
 const initList = function () {
 
     // // app-state // model
-    // let count = 0;
+    const noteModel = {
+        getNotes: function () {
+            let notes = localStorage.getItem("notes");
+            if (!notes) {
+                localStorage.setItem("notes", JSON.stringify([]));
+                notes = localStorage.getItem("notes");
+            }
+            return JSON.parse(notes);
+        },
 
-    function loadData(){
-        var notes = localStorage.getItem("notes");
-        if( !notes )
-        {
-            localStorage.setItem("notes", JSON.stringify([]));
-            notes = localStorage.getItem("notes");
+        deleteNote: function (id) {
+            let notes = localStorage.getItem("notes");
+            if (!notes) {
+                localStorage.setItem("notes", JSON.stringify([]));
+                notes = localStorage.getItem("notes");
+            }
+            notes = JSON.parse(notes);
+            console.log(id);
+            notes.splice(id, 1);
+            localStorage.setItem("notes", JSON.stringify(notes));
+        },
+    };
+
+
+    // // UI-Refs
+    let deleteButtons = "";
+
+    // // Controller / Event Listener
+    const noteController = {
+        renderUI: function (notes) {
+            const notesTemplate = $("#notes-template").html();
+            const compiledNotesTemplate = Handlebars.compile(notesTemplate);
+            $(".notes-template-content").html(compiledNotesTemplate(notes));
+
+            deleteButtons = document.querySelectorAll('.delete');
+        },
+        registerListeners: function () {
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    let noteId = e.currentTarget.dataset.deleteid
+                    noteModel.deleteNote(parseInt(noteId));
+                    this.renderUI(noteModel.getNotes());
+                    this.registerListeners();
+                });
+            });
         }
-        notes = JSON.parse(notes);
-
-        var notesTemplate = $("#notes-template").html();
-        var compiledNotesTemplate = Handlebars.compile(notesTemplate);
-        $(".notes-template-content").html(compiledNotesTemplate(notes));
-    }
-
-    function deleteNote(id){
-        var notes = localStorage.getItem("notes");
-        if (!notes) {
-            localStorage.setItem("notes", JSON.stringify([]));
-            notes = localStorage.getItem("notes");
-        }
-        notes = JSON.parse(notes);
-        notes.splice(id[1], 1);
-        localStorage.setItem("notes", JSON.stringify(notes));
-        loadData();
-    }
+    };
 
     //initUI
-    loadData();
-
-    //
-    // // UI-Refs
-    const deleteButtons = document.querySelectorAll('.delete');
-    console.log(deleteButtons);
-    // const upButton = document.getElementById('upBtn');
-    // const downButton = document.getElementById('downBtn');
-    //
-    //
-    // // Update / Render
-    // const renderUI = function () {
-    //     countDiv.innerHTML = count;
-    // };
-    //
-    // // Controller / Event Listener
-    deleteButtons.forEach(button => {
-       button.addEventListener('click', (e) => {
-           deleteNote(e.currentTarget.dataset.deleteid);
-       });
-    });
-    // downButton.onclick = function () {
-    //     countDown();
-    //     renderUI();
-    // };
+    noteController.renderUI(noteModel.getNotes());
+    noteController.registerListeners();
 
 };
 
