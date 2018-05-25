@@ -1,29 +1,52 @@
+const initNewNote = function () {
 
-$( "#new-note-save" ).click(function() {
+    // // app-state // model
+    const newNoteModel = {
+        saveNote: function (note) {
+            if (typeof(Storage) !== "undefined") {
+                let notes = JSON.parse(localStorage.getItem("notes"));
+                if (!notes){
+                    notes = localStorage.setItem("notes", JSON.stringify([]));
+                }
+                notes.push(note);
+                localStorage.setItem("notes", JSON.stringify(notes));
+            } else {
+                console.log("Sorry, your browser does not support Web Storage...");
+            }
+        },
+    };
 
-    var title = $("#new-note-title").val();
-    var description = $("#new-note-description").val();
-    var date = $("#new-note-date").val();
-    var rate = $("#rateInputId").val();
 
-    var newNote = { 'title': title, 'description': description, 'date': date, 'rate': rate };
+    // // UI-Refs
+    const inputTitle = document.getElementById('new-note-title');
+    const inputDescription = document.getElementById('new-note-description');
+    const inputDate = document.getElementById('new-note-date');
+    const inputRate = document.getElementById('rateInputId');
+    const saveButton = document.getElementById('new-note-save');
 
-    saveData(newNote);
-    window.location.href='index.html';
-});
+    // // Controller / Event Listener
+    const newNoteController = {
+        renderUI: function () {
+        },
 
-
-function saveData(note){
-
-    if (typeof(Storage) !== "undefined") {
-        let notes = JSON.parse(localStorage.getItem("notes"));
-        if (!notes){
-            notes = localStorage.setItem("notes", JSON.stringify([]));
+        registerListeners: function () {
+            saveButton.onclick = function () {
+                let newNote = { 'title': inputTitle.value, 'description': inputDescription.value, 'date': inputDate.value, 'rate': inputRate.value };
+                newNoteModel.saveNote(newNote);
+                window.location.href='index.html';
+            };
         }
-        notes.push(note);
-        localStorage.setItem("notes", JSON.stringify(notes));
-    } else {
-        console.log("Sorry, your browser does not support Web Storage...");
-    }
+    };
 
-}
+    //initUI
+    newNoteController.registerListeners();
+
+};
+
+window.onload = initNewNote;
+
+
+
+
+
+
