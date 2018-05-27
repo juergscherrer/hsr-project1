@@ -5,6 +5,10 @@
             accum += block.fn(i);
         return accum;
     });
+
+    Handlebars.registerHelper('format', function (date) {
+        return moment(date).locale("de").format('LL');
+    });
 })();
 
 

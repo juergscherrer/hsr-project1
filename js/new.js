@@ -1,5 +1,14 @@
 const initNewNote = function () {
 
+    function createId() {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1);
+        }
+        return s4() + s4() + s4() + s4() + s4() + s4() + s4() + s4();
+    }
+
     // // app-state // model
     const newNoteModel = {
         saveNote: function (note) {
@@ -31,7 +40,7 @@ const initNewNote = function () {
 
         registerListeners: function () {
             saveButton.onclick = function () {
-                let newNote = { 'title': inputTitle.value, 'description': inputDescription.value, 'date': inputDate.value, 'rate': inputRate.value };
+                let newNote = { 'id': createId(), 'title': inputTitle.value, 'description': inputDescription.value, 'date': inputDate.value, 'rate': inputRate.value, 'finished': false, 'created_at': Date.now() };
                 newNoteModel.saveNote(newNote);
                 window.location.href='index.html';
             };
