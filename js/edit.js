@@ -3,7 +3,6 @@ const initEditNote = function () {
     const paramArray = urlParam.substr(1).split('=');
     const noteId = paramArray[1];
 
-
     // // app-state // model
     const editNoteModel = {
 
@@ -34,7 +33,9 @@ const initEditNote = function () {
                 let index = notes.findIndex(function(n, i){
                     return n.id === note.id;
                 });
-                notes.splice(index, 1);
+                let oldnote = notes.splice(index, 1);
+                note.created_at = oldnote[0].created_at;
+                note.finished = oldnote[0].finished;
                 notes.push(note);
                 localStorage.setItem("notes", JSON.stringify(notes));
             } else {
@@ -65,9 +66,9 @@ const initEditNote = function () {
         },
         registerListeners: function () {
             updateButton.onclick = function () {
-                let note = { 'id': noteId, 'title': inputTitle.value, 'description': inputDescription.value, 'date': inputDate.value, 'rate': inputRate.value };
+                let note = { 'id': noteId, 'title': inputTitle.value, 'description': inputDescription.value, 'date': moment(inputDate.value), 'rate': inputRate.value };
                 editNoteModel.updateNote(note);
-                window.location.href='index.html';
+                // window.location.href='index.html';
             };
         }
     };

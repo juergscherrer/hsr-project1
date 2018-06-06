@@ -104,6 +104,7 @@
     letter-spacing: .09em;
     border: solid var(--main-color) 2px;
     color: var(--main-color);
+    background-color: var(--sec-color);
     font-size: 20px;
     text-decoration: none;
 }

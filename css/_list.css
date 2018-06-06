@@ -16,4 +16,30 @@
     color: var(--main-color);
 }
 
+.note-button-group{
+    margin-bottom: 10px;
+}
+
+.note-button {
+    margin-left: auto;
+    padding: 6px 20px 6px 20px;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    border: solid var(--main-color) 2px;
+    color: var(--main-color);
+    background-color: var(--sec-color);
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.note-button:hover {
+    background-color: var(--trd-color);
+}
+
+.note-button.active {
+    color: var(--sec-color);
+    background-color: var(--main-color);
+    border: solid var(--main-color) 2px;
+}
+
 

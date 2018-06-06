@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <link rel="stylesheet" type="text/css" href="css/fontawesome/fontawesome-all.css">
-    <script src="js/jquery-3.3.1.slim.min.js"></script>
-    <script src="js/moment.js"></script>
 </head>
 <body>
 
@@ -15,11 +13,18 @@
 <div class="navbar">
     <a href="index.html" class="active">Notes</a>
     <a href="new.html">New</a>
+    <a href="#" id="theme-changer"><i class="fas fa-moon" title="Change Theme"></i></a>
 </div>
 
 
 <div class="container">
     <h2>Notes</h2>
+    <div class="note-button-group">
+        <button class="note-button active" id="sort-by-finished">Finished at</button>
+        <button class="note-button" id="sort-by-created">Created at</button>
+        <button class="note-button" id="sort-by-rate">Rate</button>
+        <button class="note-button" id="sort-by-reverse" data-sortcode="1" data-reverse="0"><i class="fas fa-sort"></i></button>
+    </div>
     <div class="notes-template-content"></div>
 </div>
 
@@ -29,7 +34,7 @@
         <h3>{{title}}</h3>
         <p>{{description}}</p>
         <div class="note-date">
-            <span><time>{{format date}}</time></span>
+            <span><time>{{locale date}}</time></span>
         </div>
         <div class="note-rate">
             {{#times rate}}
@@ -38,7 +43,7 @@
         </div>
         <div class="note-actions">
             <a id="edit_{{id}}" class="edit" href="edit.html?note_id={{id}}"><i class="fas fa-pencil-alt"></i></a>
-            <a data-deleteid="{{id}}" class="delete" href="#"><i class="fas fa-trash-alt"></i></a>
+            <a data-deleteid="{{id}}" class="delete" href="#!"><i class="fas fa-trash-alt"></i></a>
         </div>
 
         <span>{{id}}</span>
@@ -47,10 +52,13 @@
 
 </script>
 
-
-
+<script src="js/global.js"></script>
+<script src="js/jquery-3.3.1.slim.min.js"></script>
+<script src="js/moment.js"></script>
 <script src="js/handlebars-v4.0.11.js"></script>
+<script src="js/handlebars-custom.js"></script>
 <script src="js/list.js"></script>
+<script src="js/model.js"></script>
 </body>
 </html>
 

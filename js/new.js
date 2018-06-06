@@ -40,7 +40,7 @@ const initNewNote = function () {
 
         registerListeners: function () {
             saveButton.onclick = function () {
-                let newNote = { 'id': createId(), 'title': inputTitle.value, 'description': inputDescription.value, 'date': inputDate.value, 'rate': inputRate.value, 'finished': false, 'created_at': Date.now() };
+                let newNote = { 'id': createId(), 'title': inputTitle.value, 'description': inputDescription.value, 'date': moment(inputDate.value), 'rate': inputRate.value, 'finished': false, 'created_at': moment() };
                 newNoteModel.saveNote(newNote);
                 window.location.href='index.html';
             };
