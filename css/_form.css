@@ -108,3 +108,10 @@
     font-size: 20px;
     text-decoration: none;
 }
+
+@media all and (max-width: 800px) {
+    .note-form li {
+        display: grid;
+
+    }
+}

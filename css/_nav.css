@@ -10,12 +10,6 @@
     }
 }
 
-@media all and (max-width: 500px) {
-    .navbar {
-        flex-direction: column;
-    }
-}
-
 .navbar {
     background-color: var(--sec-color);
     border: solid var(--main-color) 2px;
@@ -40,5 +34,16 @@
 .navbar a.active {
     background-color: var(--main-color);
     color: var(--sec-color);
+}
+
+@media all and (max-width: 500px) {
+    .navbar {
+        flex-direction: column;
+    }
+
+    .navbar a:last-child  {
+        margin-left: 0;
+        margin-right: 0;
+    }
 }
 

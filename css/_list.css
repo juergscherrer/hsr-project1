@@ -4,24 +4,33 @@
     padding: 10px;
 }
 
+.note-item-finished {
+    background-color: var(--trd-color);
+}
+
+
 .note-rate{
     margin-top: 20px;
 }
 
 .note-actions {
-    text-align: right;
+    margin-top: 10px;
 }
 
 .note-actions a {
     color: var(--main-color);
+    margin-right: 5px;
 }
 
 .note-button-group{
-    margin-bottom: 10px;
+    display: row;
+    flex-flow: row wrap;
+    justify-content: flex-start;
 }
 
 .note-button {
-    margin-left: auto;
+    margin-right: 5px;
+    margin-bottom: 10px;
     padding: 6px 20px 6px 20px;
     text-transform: uppercase;
     letter-spacing: .09em;
@@ -42,4 +51,18 @@
     border: solid var(--main-color) 2px;
 }
 
+.note-empty-message{
+    text-align: center;
+}
 
+.note-empty-message a{
+    color: var(--main-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+@media all and (max-width: 500px) {
+    .note-button {
+        width: 100%;
+    }
+}
