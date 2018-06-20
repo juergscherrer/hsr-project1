@@ -1,0 +1,21 @@
+{
+  "name": "noteapi",
+  "version": "1.0.0",
+  "description": "HSR Projekt 1 Note REST API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node $NODE_DEBUG_OPTION index.js"
+  },
+  "author": "Juerg Scherrer",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "body-parser": "^1.18.3",
+    "lodash": "^4.17.10",
+    "morgan": "^1.9.0",
+    "nedb": "^1.8.0"
+  }
+}

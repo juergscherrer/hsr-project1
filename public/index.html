@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Note</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/fontawesome/fontawesome-all.css">
+</head>
+<body>
+
+
+<div class="navbar">
+    <a href="index.html" class="active">Notes</a>
+    <a href="edit.html">New</a>
+    <a href="#" id="theme-changer"><i class="fas fa-moon" title="Change Theme"></i></a>
+</div>
+
+
+<div class="container">
+    <h2>Notes</h2>
+    <div class="note-button-group">
+        <button class="note-button active" id="sort-by-finished" data-sortcode="1">Finished at</button>
+        <button class="note-button" id="sort-by-created" data-sortcode="2">Created at</button>
+        <button class="note-button" id="sort-by-rate" data-sortcode="3">Rate</button>
+        <button class="note-button" id="show-finished-notes-button" data-showfinished="0">Show Finished</i></button>
+    </div>
+    <div id="notes-template-content"></div>
+</div>
+
+<script id="notes-template" type="text/x-handlebars-template">
+    {{#each this}}
+    <div class="note-item {{isFinshed finished}}">
+        <h3>{{title}}</h3>
+        <p>{{description}}</p>
+        <div class="note-date">
+            <span><time>{{locale date}}</time></span>
+        </div>
+        <div class="note-rate">
+            {{#stars rate}}
+            <span><i class="fas fa-star"></i></span>
+            {{/stars}}
+            {{#stars_empty rate}}
+            <span><i class="far fa-star"></i></span>
+            {{/stars_empty}}
+        </div>
+        <div class="note-actions">
+            {{#if finished}}
+            <a data-checkid="{{_id}}" data-finished="{{finished}}" class="check" href="#" title="Restore"><i class="fas fa-retweet"></i></a>
+            {{else}}
+            <a data-checkid="{{_id}}" data-finished="{{finished}}" class="check" href="#" title="Complete"><i class="fas fa-check"></i></a>
+            <a id="edit_{{id}}" class="edit" href="edit.html?note_id={{_id}}" title="Edit"><i class="fas fa-pencil-alt"></i></a>
+            {{/if}}
+            <!--<a data-deleteid="{{_id}}" class="delete" href="#" title="Delete"><i class="fas fa-trash-alt"></i></a>-->
+        </div>
+        <span>{{_id}}</span>
+    </div>
+    {{else}}
+    <div class="note-empty-message">
+        <p>No Notes. Click <a href="edit.html">here</a> to add a new Note.</p>
+    </div>
+    {{/each}}
+
+</script>
+
+<script src="js/global.js"></script>
+<script src="vendor/js/jquery-3.3.1.slim.min.js"></script>
+<script src="vendor/js/moment.js"></script>
+<script src="vendor/js/handlebars-v4.0.11.js"></script>
+<script src="js/helpers/handlebars-helpers.js"></script>
+<script src="js/controllers/listController.js"></script>
+<script src="js/models/noteModel.js"></script>
+<script src="js/services/noteService.js"></script>
+</body>
+</html>
+
+
+
