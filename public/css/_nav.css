@@ -41,9 +41,14 @@
         flex-direction: column;
     }
 
+    .navbar a {
+        border-bottom: solid var(--main-color) 2px;
+    }
+
     .navbar a:last-child  {
         margin-left: 0;
         margin-right: 0;
+        border-bottom: none;
     }
 }
 

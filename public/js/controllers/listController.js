@@ -1,9 +1,8 @@
 const initList = async function () {
 
 
-    //////////// IIFE setzens
-    // // UI-Refs
-    // let deleteButtons;
+
+    // UI-Refs
     let checkButtons;
     const sortByFinishedButton = document.getElementById('sort-by-finished');
     const sortByCreatedButton = document.getElementById('sort-by-created');
@@ -14,20 +13,18 @@ const initList = async function () {
     const createNotesHTML = Handlebars.compile(notesTemplate);
     const noteTemplateContent = document.getElementById('notes-template-content');
 
-    // // Controller / Event Listener
+    // Controller / Event Listener
     const noteController = {
         renderUI: function (notes) {
 
             noteTemplateContent.innerHTML = createNotesHTML(notes);
-
-            // deleteButtons = document.querySelectorAll('.delete');
             checkButtons = document.querySelectorAll('.check');
 
             this.registerListeners();
         },
 
-        changeButtonColors: function (state){
-            switch(state) {
+        changeButtonColors: function (state) {
+            switch (state) {
                 case "1":
                     sortByFinishedButton.classList.add("active");
                     sortByCreatedButton.classList.remove("active");
@@ -60,49 +57,40 @@ const initList = async function () {
         },
 
         registerListeners: function () {
-            // deleteButtons.forEach(button => {
-            //     button.addEventListener('click', (e) => {
-            //         e.preventDefault();
-            //         let noteId = e.currentTarget.dataset.deleteid
-            //         noteService.deleteNote(noteId);
-            //         this.renderUI(noteService.getNotes(sortbyReverseButton.dataset.sortcode, showFinishedNotesButton.dataset.showfinished));
-            //         // this.registerListeners();
-            //     });
-            // });
 
             checkButtons.forEach(button => {
-                // noinspection JSAnnotator
-                button.addEventListener('click', (e) => {
+                button.addEventListener('click', async (e) => {
                     e.preventDefault();
                     let noteId = e.currentTarget.dataset.checkid;
                     let finished = e.currentTarget.dataset.finished;
                     let note = new Note();
                     note._id = noteId;
                     note.finished = !(finished === "true");
-                    console.log(note.finished);
-                    noteService.finishNote(note);
-                    // this.renderUI(noteService.getNotes(sortbyReverseButton.dataset.sortcode, showFinishedNotesButton.dataset.showfinished));
+                    noteService.updateNote(note);
 
-                    // const allNotes = await noteService.getNotes("0");
-                    // noteController.renderUI(allNotes);
+                    const allNotes = await noteService.getNotes(showFinishedNotesButton.dataset.showfinished, sortByRateButton.dataset.sortcode);
+                    noteController.renderUI(allNotes);
 
-                    noteService.getNotes(showFinishedNotesButton.dataset.showfinished, sortByRateButton.dataset.sortcode).then(notes => {
-                        noteController.renderUI(notes);
-                    });
+                    // noteService.getNotes(showFinishedNotesButton.dataset.showfinished, sortByRateButton.dataset.sortcode).then(notes => {
+                    //     noteController.renderUI(notes);
+                    // });
 
                 });
             });
 
             sortByFinishedButton.onclick = function () {
                 noteController.registerSortButtons(sortByFinishedButton.dataset.sortcode);
+                showFinishedNotesButton.dataset.sortcode = sortByFinishedButton.dataset.sortcode;
             };
 
             sortByCreatedButton.onclick = function () {
                 noteController.registerSortButtons(sortByCreatedButton.dataset.sortcode);
+                showFinishedNotesButton.dataset.sortcode = sortByCreatedButton.dataset.sortcode;
             };
 
             sortByRateButton.onclick = function () {
                 noteController.registerSortButtons(sortByRateButton.dataset.sortcode);
+                showFinishedNotesButton.dataset.sortcode = sortByRateButton.dataset.sortcode;
             };
 
             showFinishedNotesButton.onclick = function () {
@@ -113,10 +101,9 @@ const initList = async function () {
                     showFinishedNotesButton.dataset.showfinished = "0";
                     showFinishedNotesButton.classList.remove("active");
                 }
-                console.log(showFinishedNotesButton.dataset.showfinished);
-                noteService.getNotes(showFinishedNotesButton.dataset.showfinished, "1").then(notes => {
+                noteService.getNotes(showFinishedNotesButton.dataset.showfinished, showFinishedNotesButton.dataset.sortcode).then(notes => {
                     noteController.renderUI(notes);
-                    noteController.changeButtonColors("1");
+                    noteController.changeButtonColors(showFinishedNotesButton.dataset.sortcode);
                 });
 
             };
@@ -126,10 +113,6 @@ const initList = async function () {
     //initUI
     const allNotes = await noteService.getNotes("0", "1");
     noteController.renderUI(allNotes);
-
-   /* noteService.getNotes("0").then(notes => {
-        noteController.renderUI(notes);
-    });*/
 
 };
 

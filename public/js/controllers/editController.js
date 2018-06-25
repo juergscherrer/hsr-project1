@@ -23,13 +23,7 @@ const initEditNote = async function () {
             notesTemplate = document.getElementById('note-template').innerHTML;
             createNotesHTML = Handlebars.compile(notesTemplate);
             noteTemplateContent = document.getElementById('note-template-content');
-
             noteTemplateContent.innerHTML = createNotesHTML(note);
-
-
-            const editNoteTemplate = $("#note-template").html();
-            const compiledEditNoteTemplate = Handlebars.compile(editNoteTemplate);
-            $(".note-template-content").html(compiledEditNoteTemplate(note));
 
             inputTitle = document.getElementById('note-title');
             inputDescription = document.getElementById('note-description');
@@ -47,11 +41,11 @@ const initEditNote = async function () {
         },
         registerListeners: function () {
             updateButton.onclick = function () {
-                if(noteForm.checkValidity()){
+                if (noteForm.checkValidity()) {
                     let note = new Note(noteId, inputTitle.value, inputDescription.value, moment(inputDate.value), inputRate.value);
-                    if (noteId){
+                    if (noteId) {
                         noteService.updateNote(note);
-                    } else{
+                    } else {
                         noteService.saveNote(note);
                     }
                     window.location.href = '/index.html';
@@ -63,14 +57,8 @@ const initEditNote = async function () {
     //initUI
     const note = await noteService.getNote(noteId);
     editNoteController.renderUI(note[0]);
-
-    // evtl in renderUI ???
     editNoteController.registerListeners();
 
 };
 
 window.onload = initEditNote;
-
-
-
-

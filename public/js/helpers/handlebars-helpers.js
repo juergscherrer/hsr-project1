@@ -29,4 +29,8 @@
         return " ";
     });
 
+    Handlebars.registerHelper('rateHelper', function (rate) {
+        return rate || "3";
+    });
+
 })();

@@ -5,16 +5,41 @@
 }
 
 .note-item-finished {
+    /*background-color: var(--trd-color);*/
     background-color: var(--trd-color);
+    background-image: repeating-linear-gradient(135deg, transparent, transparent 25px, var(--sec-color) 25px, var(--sec-color) 50px);
 }
 
 
 .note-rate{
-    margin-top: 20px;
+
+}
+
+.note-title {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.note-title span{
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.note-content{
+    margin-bottom: 10px;
+}
+
+
+
+.note-bottom{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .note-actions {
-    margin-top: 10px;
 }
 
 .note-actions a {

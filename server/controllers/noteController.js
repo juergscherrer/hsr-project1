@@ -7,7 +7,6 @@ const getNotes = (req, res, next) => {
     let sortParams = req.query.sort || "1";
     let filtering = false;
 
-
     if (filterParams === "0") {
         filtering = true
     }
@@ -145,23 +144,9 @@ const updateNote = (req, res, next) => {
     });
 };
 
-// Delete note
-const deleteNote = (req, res, next) => {
-    let id = req.params.noteId;
-    NotesDB.remove({
-        _id: id
-    }, {}, (err, numRemoved) => {
-        res.status(200).json({
-            success: true
-        });
-    });
-};
-
-
 module.exports = {
     getNotes,
     createNote,
     getNote,
     updateNote,
-    deleteNote
 };

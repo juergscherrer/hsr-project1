@@ -4,6 +4,7 @@
     <title>Note</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/img/favicon.png" />
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <link rel="stylesheet" type="text/css" href="css/fontawesome/fontawesome-all.css">
 </head>
@@ -18,12 +19,12 @@
 
 
 <div class="container">
-    <h2>Notes</h2>
+    <h2><i class="far fa-list-alt"></i> Notes</h2>
     <div class="note-button-group">
         <button class="note-button active" id="sort-by-finished" data-sortcode="1">Finished at</button>
         <button class="note-button" id="sort-by-created" data-sortcode="2">Created at</button>
         <button class="note-button" id="sort-by-rate" data-sortcode="3">Rate</button>
-        <button class="note-button" id="show-finished-notes-button" data-showfinished="0">Show Finished</i></button>
+        <button class="note-button" id="show-finished-notes-button" data-showfinished="0" data-sortcode="1">Show Finished</i></button>
     </div>
     <div id="notes-template-content"></div>
 </div>
@@ -31,29 +32,38 @@
 <script id="notes-template" type="text/x-handlebars-template">
     {{#each this}}
     <div class="note-item {{isFinshed finished}}">
-        <h3>{{title}}</h3>
-        <p>{{description}}</p>
-        <div class="note-date">
-            <span><time>{{locale date}}</time></span>
+        <div class="note-title">
+            <span>{{title}}</span>
+            <div class="note-date">
+                <time>{{locale date}}</time>
+            </div>
         </div>
-        <div class="note-rate">
-            {{#stars rate}}
-            <span><i class="fas fa-star"></i></span>
-            {{/stars}}
-            {{#stars_empty rate}}
-            <span><i class="far fa-star"></i></span>
-            {{/stars_empty}}
+        <div class="note-content">
+            <p>{{description}}</p>
         </div>
-        <div class="note-actions">
-            {{#if finished}}
-            <a data-checkid="{{_id}}" data-finished="{{finished}}" class="check" href="#" title="Restore"><i class="fas fa-retweet"></i></a>
-            {{else}}
-            <a data-checkid="{{_id}}" data-finished="{{finished}}" class="check" href="#" title="Complete"><i class="fas fa-check"></i></a>
-            <a id="edit_{{id}}" class="edit" href="edit.html?note_id={{_id}}" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-            {{/if}}
-            <!--<a data-deleteid="{{_id}}" class="delete" href="#" title="Delete"><i class="fas fa-trash-alt"></i></a>-->
+
+
+        <div class="note-bottom">
+            <div class="note-rate">
+                {{#stars rate}}
+                <span><i class="fas fa-star"></i></span>
+                {{/stars}}
+                {{#stars_empty rate}}
+                <span><i class="far fa-star"></i></span>
+                {{/stars_empty}}
+            </div>
+            <div class="note-actions">
+                {{#if finished}}
+                <a data-checkid="{{_id}}" data-finished="{{finished}}" class="check" href="#" title="Restore"><i
+                        class="fas fa-retweet"></i></a>
+                {{else}}
+                <a data-checkid="{{_id}}" data-finished="{{finished}}" class="check" href="#" title="Complete"><i
+                        class="fas fa-check"></i></a>
+                <a id="edit_{{id}}" class="edit" href="edit.html?note_id={{_id}}" title="Edit"><i
+                        class="fas fa-pencil-alt"></i></a>
+                {{/if}}
+            </div>
         </div>
-        <span>{{_id}}</span>
     </div>
     {{else}}
     <div class="note-empty-message">
@@ -64,7 +74,6 @@
 </script>
 
 <script src="js/global.js"></script>
-<script src="vendor/js/jquery-3.3.1.slim.min.js"></script>
 <script src="vendor/js/moment.js"></script>
 <script src="vendor/js/handlebars-v4.0.11.js"></script>
 <script src="js/helpers/handlebars-helpers.js"></script>
