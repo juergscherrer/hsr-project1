@@ -5,14 +5,8 @@
 }
 
 .note-item-finished {
-    /*background-color: var(--trd-color);*/
     background-color: var(--trd-color);
     background-image: repeating-linear-gradient(135deg, transparent, transparent 25px, var(--sec-color) 25px, var(--sec-color) 50px);
-}
-
-
-.note-rate{
-
 }
 
 .note-title {
@@ -22,18 +16,16 @@
     margin-bottom: 10px;
 }
 
-.note-title span{
+.note-title span {
     font-weight: bold;
     font-size: 1.2em;
 }
 
-.note-content{
+.note-content {
     margin-bottom: 10px;
 }
 
-
-
-.note-bottom{
+.note-bottom {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -47,7 +39,7 @@
     margin-right: 5px;
 }
 
-.note-button-group{
+.note-button-group {
     display: row;
     flex-flow: row wrap;
     justify-content: flex-start;
@@ -76,11 +68,11 @@
     border: solid var(--main-color) 2px;
 }
 
-.note-empty-message{
+.note-empty-message {
     text-align: center;
 }
 
-.note-empty-message a{
+.note-empty-message a {
     color: var(--main-color);
     text-decoration: none;
     font-weight: bold;

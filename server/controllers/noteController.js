@@ -5,93 +5,35 @@ const NotesDB = require('../models/noteModel');
 const getNotes = (req, res, next) => {
     let filterParams = req.query.filter || "0";
     let sortParams = req.query.sort || "1";
-    let filtering = false;
+    let filtering = {};
 
     if (filterParams === "0") {
-        filtering = true
+        filtering = {finished: false};
     }
+    let sorting;
+    let sortingArr = [{"date": 1}, {"createdAt": -1}, {"rate": -1}];
 
     switch (sortParams) {
         case "1":
-            if (filtering) {
-                NotesDB.find({
-                    finished: false
-                }, {
-                    updatedAt: 0,
-                    createdAt: 0
-                }).sort({
-                        date: 1,
-                    }
-                ).exec((err, notes) => {
-                    res.status(200).json(notes);
-                });
-            } else {
-                NotesDB.find({}, {
-                    updatedAt: 0,
-                    createdAt: 0
-                }).sort({
-                        date: 1,
-                    }
-                ).exec((err, notes) => {
-                    res.status(200).json(notes);
-                });
-            }
+            sorting = sortingArr[0];
             break;
         case "2":
-            if (filtering) {
-                NotesDB.find({
-                    finished: false
-                }, {
-                    updatedAt: 0,
-                    createdAt: 0
-                }).sort({
-                    createdAt: -1,
-                    }
-                ).exec((err, notes) => {
-                    res.status(200).json(notes);
-                });
-            } else {
-                NotesDB.find({}, {
-                    updatedAt: 0,
-                    createdAt: 0
-                }).sort({
-                    createdAt: -1,
-                    }
-                ).exec((err, notes) => {
-                    res.status(200).json(notes);
-                });
-            }
+            sorting = sortingArr[1];
             break;
         case "3":
-            if (filtering) {
-                NotesDB.find({
-                    finished: false
-                }, {
-                    updatedAt: 0,
-                    createdAt: 0
-                }).sort({
-                    rate: -1,
-                    }
-                ).exec((err, notes) => {
-                    res.status(200).json(notes);
-                });
-            } else {
-                NotesDB.find({}, {
-                    updatedAt: 0,
-                    createdAt: 0
-                }).sort({
-                    rate: -1,
-                    }
-                ).exec((err, notes) => {
-                    res.status(200).json(notes);
-                });
-            }
+            sorting = sortingArr[2];
             break;
         default:
-
     }
 
-
+    NotesDB.find(
+        filtering, {
+            updatedAt: 0,
+            createdAt: 0
+        }).sort(sorting
+    ).exec((err, notes) => {
+        res.status(200).json(notes);
+    });
 };
 
 // Get a single note details

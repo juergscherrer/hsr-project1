@@ -3,6 +3,7 @@ const initEditNote = async function () {
     const paramArray = urlParam.substr(1).split('=');
     const noteId = paramArray[1];
 
+    let note = {};
 
     // // UI-Refs
     let inputTitle;
@@ -19,7 +20,6 @@ const initEditNote = async function () {
     // // Controller / Event Listener
     const editNoteController = {
         renderUI: function (note) {
-
             notesTemplate = document.getElementById('note-template').innerHTML;
             createNotesHTML = Handlebars.compile(notesTemplate);
             noteTemplateContent = document.getElementById('note-template-content');
@@ -40,7 +40,7 @@ const initEditNote = async function () {
             inputRate.oninput = displayRangeValue;
         },
         registerListeners: function () {
-            updateButton.onclick = function () {
+            updateButton.onclick = function (e) {
                 if (noteForm.checkValidity()) {
                     let note = new Note(noteId, inputTitle.value, inputDescription.value, moment(inputDate.value), inputRate.value);
                     if (noteId) {
@@ -48,6 +48,7 @@ const initEditNote = async function () {
                     } else {
                         noteService.saveNote(note);
                     }
+                    e.preventDefault();
                     window.location.href = '/index.html';
                 }
             };
@@ -55,7 +56,9 @@ const initEditNote = async function () {
     };
 
     //initUI
-    const note = await noteService.getNote(noteId);
+    if (noteId !== undefined) {
+        note = await noteService.getNote(noteId);
+    }
     editNoteController.renderUI(note[0]);
     editNoteController.registerListeners();
 

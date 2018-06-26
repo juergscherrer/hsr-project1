@@ -1,47 +1,45 @@
 const noteService = (() => {
 
-    function getNotes (filter, sorting) {
-        let url = 'http://localhost:3000/notes?filter='+filter+'&sort='+sorting;
+    const mainURL = 'http://localhost:3000/notes/';
+
+    function getNotes(filter, sorting) {
+        let url = mainURL + '?filter=' + filter + '&sort=' + sorting;
         return fetch(url)
-            .then(function(response) {
+            .then(function (response) {
                 return response.json();
             });
     }
 
-    function saveNote (note){
-        let url = 'http://localhost:3000/notes';
-
-        fetch(url, {
+    function saveNote(note) {
+        fetch(mainURL, {
             method: 'POST',
             body: JSON.stringify(note),
-            headers:{
+            headers: {
                 'Content-Type': 'application/json'
             }
         }).then(res => res.json())
-            .catch(error => console.error('Error:', error))
-            .then(response => console.log('Success:', response));
+            .catch(error => console.error('Error:', error));
     }
 
-    function getNote (noteId) {
-        let url = 'http://localhost:3000/notes/'+noteId;
+    function getNote(noteId) {
+        let url = mainURL + noteId;
         return fetch(url)
-            .then(function(response) {
+            .then(function (response) {
                 return response.json();
             });
     }
 
-    function updateNote (note) {
-        let url = 'http://localhost:3000/notes/'+note._id;
+    function updateNote(note) {
+        let url = mainURL + note._id;
 
         fetch(url, {
             method: 'PUT',
             body: JSON.stringify(note),
-            headers:{
+            headers: {
                 'Content-Type': 'application/json'
             }
         }).then(res => res.json())
-            .catch(error => console.error('Error:', error))
-            .then(response => console.log('Success:', response));
+            .catch(error => console.error('Error:', error));
     }
 
     return {

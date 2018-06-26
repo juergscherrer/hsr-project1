@@ -15,12 +15,13 @@ const initList = async function () {
 
     // Controller / Event Listener
     const noteController = {
-        renderUI: function (notes) {
+        renderUI: function (notes, sortcode) {
 
             noteTemplateContent.innerHTML = createNotesHTML(notes);
             checkButtons = document.querySelectorAll('.check');
 
             this.registerListeners();
+            noteController.changeButtonColors(sortcode);
         },
 
         changeButtonColors: function (state) {
@@ -48,12 +49,10 @@ const initList = async function () {
             }
         },
 
-        registerSortButtons: function (sortcode) {
+        registerSortButtons: async function (sortcode) {
 
-            noteService.getNotes(showFinishedNotesButton.dataset.showfinished, sortcode).then(notes => {
-                noteController.renderUI(notes);
-            });
-            noteController.changeButtonColors(sortcode);
+            const notes = await noteService.getNotes(showFinishedNotesButton.dataset.showfinished, sortcode);
+            noteController.renderUI(notes, sortcode);
         },
 
         registerListeners: function () {
@@ -68,13 +67,8 @@ const initList = async function () {
                     note.finished = !(finished === "true");
                     noteService.updateNote(note);
 
-                    const allNotes = await noteService.getNotes(showFinishedNotesButton.dataset.showfinished, sortByRateButton.dataset.sortcode);
-                    noteController.renderUI(allNotes);
-
-                    // noteService.getNotes(showFinishedNotesButton.dataset.showfinished, sortByRateButton.dataset.sortcode).then(notes => {
-                    //     noteController.renderUI(notes);
-                    // });
-
+                    const notes = await noteService.getNotes(showFinishedNotesButton.dataset.showfinished, sortByRateButton.dataset.sortcode);
+                    noteController.renderUI(notes);
                 });
             });
 
@@ -93,7 +87,7 @@ const initList = async function () {
                 showFinishedNotesButton.dataset.sortcode = sortByRateButton.dataset.sortcode;
             };
 
-            showFinishedNotesButton.onclick = function () {
+            showFinishedNotesButton.onclick = async function () {
                 if (showFinishedNotesButton.dataset.showfinished === "0") {
                     showFinishedNotesButton.dataset.showfinished = "1";
                     showFinishedNotesButton.classList.add("active");
@@ -101,19 +95,16 @@ const initList = async function () {
                     showFinishedNotesButton.dataset.showfinished = "0";
                     showFinishedNotesButton.classList.remove("active");
                 }
-                noteService.getNotes(showFinishedNotesButton.dataset.showfinished, showFinishedNotesButton.dataset.sortcode).then(notes => {
-                    noteController.renderUI(notes);
-                    noteController.changeButtonColors(showFinishedNotesButton.dataset.sortcode);
-                });
 
+                const notes = await noteService.getNotes(showFinishedNotesButton.dataset.showfinished, showFinishedNotesButton.dataset.sortcode);
+                noteController.renderUI(notes, showFinishedNotesButton.dataset.sortcode);
             };
         },
     };
 
     //initUI
-    const allNotes = await noteService.getNotes("0", "1");
-    noteController.renderUI(allNotes);
-
+    const notes = await noteService.getNotes("0", "1");
+    noteController.renderUI(notes, "1");
 };
 
 window.onload = initList;
