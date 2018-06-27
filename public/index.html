@@ -23,7 +23,7 @@
     <div class="note-button-group">
         <button class="note-button active" id="sort-by-finished" data-sortcode="1">Finished at</button>
         <button class="note-button" id="sort-by-created" data-sortcode="2">Created at</button>
-        <button class="note-button" id="sort-by-rate" data-sortcode="3">Rate</button>
+        <button class="note-button" id="sort-by-rate" data-sortcode="3">Importance</button>
         <button class="note-button" id="show-finished-notes-button" data-showfinished="0" data-sortcode="1">Show
             Finished</i></button>
     </div>
@@ -36,7 +36,7 @@
         <div class="note-title">
             <span>{{title}}</span>
             <div class="note-date">
-                <time>{{locale date}}</time>
+                Finished at: <time><b>{{locale date}}</b></time>
             </div>
         </div>
         <div class="note-content">

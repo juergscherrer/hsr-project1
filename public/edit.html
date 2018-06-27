@@ -34,11 +34,11 @@
                           placeholder="Marktplatz St. Gallen">{{description}}</textarea>
             </li>
             <li>
-                <label for="note-date">Date</label>
-                <input type="date" id="note-date" required placeholder="Enter your email here" value="{{format date}}">
+                <label for="note-date">Finished at</label>
+                <input type="date" id="note-date" required value="{{format date}}">
             </li>
             <li>
-                <label for="note-rate-input">Rate</label>
+                <label for="note-rate-input">Importance</label>
                 <input id="note-rate-input" type="range" value="{{rate}}" min="1" max="5">
                 <output id="note-rate-output" for="note-rate-input">{{rateHelper rate}}</output>
             </li>

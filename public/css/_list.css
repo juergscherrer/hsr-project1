@@ -40,8 +40,6 @@
 }
 
 .note-button-group {
-    display: row;
-    flex-flow: row wrap;
     justify-content: flex-start;
 }
 
