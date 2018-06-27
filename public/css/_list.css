@@ -66,10 +66,6 @@
     border: solid var(--main-color) 2px;
 }
 
-.note-empty-message {
-    text-align: center;
-}
-
 .note-empty-message a {
     color: var(--main-color);
     text-decoration: none;
